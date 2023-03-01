@@ -11,7 +11,6 @@ import WidgetWrapper from "./WidgetWrapper";
 import React, { useState } from "react";
 
 const CommentBox = () => {
-  
   const [values, setValues] = useState({
     content: {
       comment: "",
@@ -20,16 +19,12 @@ const CommentBox = () => {
   });
 
   const postComment = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const postCommentResponse = await fetch("http://localhost:3001/comments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
-    const commented = await postCommentResponse.json();
-    console.log("success: ", commented);
-    console.log("hi there");
-    console.log(JSON.stringify(values));
   };
 
   const handleCommentInputChange = (event) => {
@@ -38,7 +33,6 @@ const CommentBox = () => {
       ...values,
       content: { comment: event.target.value, user: "testUser" },
     }));
-    console.log(values);
   };
 
   return (
@@ -47,15 +41,7 @@ const CommentBox = () => {
       <FlexBetween gap="0.5rem" pb="1.1rem">
         <FlexBetween gap="1rem">
           <Box>
-            <Typography
-              variant="h4"
-              fontWeight="500"
-              sx={{
-                "&:hover": {
-                  cursor: "pointer",
-                },
-              }}
-            >
+            <Typography variant="h4" fontWeight="500">
               Write your comment....
             </Typography>
           </Box>
